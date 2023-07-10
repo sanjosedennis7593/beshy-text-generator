@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, Button, Text } from 'rebass'
 import { Label, Textarea } from '@rebass/forms'
+import ReactGA from 'react-ga'
+
 
 import Spinner from '../components/Spinner';
 
@@ -14,6 +16,7 @@ const BESHY_OPTIONS = [
 ];
 
 const Home = props => {
+    const textRef = useRef(null);
     const [text, setText] = useState('');
     const [converetedText, setConveretedText] = useState('');
     const [selectedBeshy, setSelectedBeshy] = useState('🤸');
@@ -33,6 +36,7 @@ const Home = props => {
             let formattedText = text.replaceAll(/\s\s+/g, ' ');
             formattedText = formattedText.replaceAll(' ', selectedBeshy);
             setConveretedText(formattedText);
+            ReactGA.event({category: 'Home', action: 'Click', label: 'Click Convert Button'});
         }
         else{
             setConveretedText('');
@@ -166,9 +170,9 @@ const Home = props => {
                         cursor: 'pointer',
                         marginTop: 12
                     }} mr={2}>
-                        Clear All
-                    </Button>
-                    
+                    Clear All
+                </Button>
+
             </Box>
 
 
@@ -178,11 +182,12 @@ const Home = props => {
                 borderRadius: 10,
                 padding: 12,
                 maxHeight: 250,
-                overflowY:'scroll',
+                overflowY: 'scroll',
                 wordWrap: 'break-word'
             }}>
 
                 <Text
+                    ref={textRef}
                     fontSize={[4]}
                     color='primary'>
                     {converetedText}
@@ -194,12 +199,12 @@ const Home = props => {
                 marginTop: 3,
                 marginBottom: 12
             }}>
-                <Button onClick={handleCopy} style={{ 
-                    backgroundColor: 'gray', 
-                    fontWeight: 'bolder', 
-                    cursor: 'pointer', 
-                    float: 'right', 
-                    marginBottom: 12 
+                <Button onClick={handleCopy} style={{
+                    backgroundColor: 'gray',
+                    fontWeight: 'bolder',
+                    cursor: 'pointer',
+                    float: 'right',
+                    marginBottom: 12
                 }} mr={2}>{isCopied ? 'Copied!' : 'Copy'}</Button>
             </Box>}
 
