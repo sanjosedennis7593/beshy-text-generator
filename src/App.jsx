@@ -4,14 +4,14 @@ import ReactGA from 'react-ga'
 
 import Home from './pages/Home'
 
-const TRACKING_ID = "UA-163982195-1";
+const TRACKING_ID = "G-NSX85F02JZ";
 
 ReactGA.initialize(TRACKING_ID);
 
 function App() {
 
   useEffect(() => {
-    ReactGA.event({category: 'Home', action: 'View', label: 'Page View'});
+    ReactGA.send({hitType: 'pageView', page: '/'});
   },[])
 
   return (
