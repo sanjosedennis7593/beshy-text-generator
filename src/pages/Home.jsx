@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box, Button, Text } from 'rebass'
 import { Label, Textarea } from '@rebass/forms'
-import ReactGA from 'react-ga'
 
 
 import Spinner from '../components/Spinner';
@@ -36,7 +35,6 @@ const Home = props => {
             let formattedText = text.replaceAll(/\s\s+/g, ' ');
             formattedText = formattedText.replaceAll(' ', selectedBeshy);
             setConveretedText(formattedText);
-            ReactGA.event({category: 'Home', action: 'Click', label: 'Click Convert Button'});
         }
         else{
             setConveretedText('');
